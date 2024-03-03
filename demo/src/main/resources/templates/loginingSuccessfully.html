@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход</title>
+</head>
+<body>
+<form >
+    Добро пожаловать в систему  <data th:text="${client.login}"/> !<br><br>
+    Письмо с подтверждением аккаунта уже отправлено на <data th:text="${client.email}"/>
+</form>
+</body>
+</html>

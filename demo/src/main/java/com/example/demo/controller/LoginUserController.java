@@ -1,6 +1,7 @@
 /*
 package com.example.demo.controller;
 
+
 import com.example.demo.dao.model.User;
 import com.example.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,7 @@ public class LoginUserController {
         return"login";
     }
     @PostMapping("/login/check")
-    public String checkUserLogin(User user, Model model){
+    public String checkUserLogin(Users user,Model model){
         if(userService.getPasswordByLogin(user.getLogin()).equals(user.getPassword())) {
             return "redirect:/logining"+ userService.getIDByLogin(user.getLogin());
         }
@@ -37,5 +38,5 @@ public class LoginUserController {
             return "login";
         }
     }
-}
-*/
+}*/
+

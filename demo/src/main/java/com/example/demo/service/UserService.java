@@ -1,6 +1,7 @@
 
 package com.example.demo.service;
 
+import com.example.demo.HibernateSession;
 import com.example.demo.dao.model.User;
 import org.springframework.stereotype.Service;
 
@@ -23,17 +24,15 @@ import java.util.List;
 @Service
 public class UserService {
 
-
+    SessionFactory sessionFactory =  HibernateSession.buildSessionFactory();
 
     User user = new User();
-    Configuration configuration = new Configuration();
+    /*Configuration configuration = new Configuration();*/
 
     private long ID=0;
 
 
     public void saveUser(User user){
-        configuration.configure();
-        SessionFactory sessionFactory = configuration.buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
         session.save(user);
@@ -44,8 +43,6 @@ public class UserService {
 
     }
     public User getUserByID(Long id){
-        configuration.configure();
-        SessionFactory sessionFactory = configuration.buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
         user = session.get(User.class,id);
@@ -54,8 +51,6 @@ public class UserService {
 
     }
     public boolean checkSameLogin(String login){
-        configuration.configure();
-        SessionFactory sessionFactory = configuration.buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
         Query<User> query = session.createQuery("FROM users WHERE login = :login",User.class);
@@ -64,6 +59,8 @@ public class UserService {
         return query.getSingleResultOrNull() == null;
 
     }
+
+
 
    /* public String getPasswordByLogin(String Login){
     configuration.configure();

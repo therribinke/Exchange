@@ -14,5 +14,8 @@
         <property name="format_sql">true</property>
         <property name="show_sql">true</property>
         <mapping class="com.example.demo.dao.model.User"/>
+        <mapping class="com.example.demo.dao.model.ExchangesValues"/>
+        <mapping class="com.example.demo.dao.model.Exchange"/>
+
     </session-factory>
 </hibernate-configuration>

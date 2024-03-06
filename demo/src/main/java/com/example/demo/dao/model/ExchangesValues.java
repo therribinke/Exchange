@@ -1,11 +1,9 @@
 package com.example.demo.dao.model;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,15 +12,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table
+@Builder
 public class ExchangesValues {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(name="exchangename")
     private String exchangename;
-    @Column(name="valuesname1")
-    private String valuesname1;
-    @Column(name="valuesname2")
-    private String valuesname2;
-    private Float values1;
-    private Float values2;
+    @ManyToOne
+    @JoinColumn(name="valuename1")
+    private ValueNames valuename1;
+    @ManyToOne
+    @JoinColumn(name="valuename2")
+    private ValueNames valuename2;
+    private Float value1;
+    private Float value2;
 }

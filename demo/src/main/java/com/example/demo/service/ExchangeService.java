@@ -11,17 +11,32 @@ import java.util.List;
 public class ExchangeService {
     SessionFactory sessionFactory = HibernateSession.buildSessionFactory();
 
-    public  List<ExchangesValues> getCourse(String valuesname1, String valuesname2) {
+    public  List<ExchangesValues> getCourse(String valuename1, String valuename2) {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
         Query<ExchangesValues> query = session.createQuery("FROM exchangesvalues " +
-                                                    "WHERE (valuesname1 = :valuesname1) AND " +
-                                                    "(valuesname2 = :valuesname2)",ExchangesValues.class);
+                                                    "WHERE (valuename1 = :valuename1) AND " +
+                                                    "(valuename2 = :valuename2)",ExchangesValues.class);
 
-        query.setParameter("valuesname1",valuesname1);
-        query.setParameter("valuesname2",valuesname2);
+        query.setParameter("valuename1",valuename1);
+        query.setParameter("valuename2",valuename2);
         List<ExchangesValues> list = query.getResultList();
         session.getTransaction().commit();
         return list;
+    }
+    public  List<ExchangesValues> getAllCourses() {
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
+        Query<ExchangesValues> query = session.createQuery("FROM exchangesvalues",ExchangesValues.class);
+        List<ExchangesValues> list = query.getResultList();
+        session.getTransaction().commit();
+        return list;
+    }
+
+    public void saveExchangeCourse(ExchangesValues exchangesValues){
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
+        session.save(exchangesValues);
+        session.getTransaction().commit();
     }
 }

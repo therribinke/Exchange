@@ -18,14 +18,40 @@
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="61580fc5-0958-4359-8c96-9d46162a6d1b">
       <console name="Connection" type="STANDARD" schema="public" session="Main"><![CDATA[create table users (
-id bigint primary key,
+id serial primary key,
 login varchar(64),
 password varchar(64),
-email varchar(320),
-balance double precision
+email varchar(320)
 );
 
-drop table users;]]></console>
+drop table users;
+
+create table exchangesvalues(
+id serial primary key,
+exchangename varchar(128),
+valuename1 int references valuenames,
+valuename2 int references valuenames,
+value1 real,
+value2 real
+);
+
+drop table exchangesvalues;
+
+create table userbalance(
+id serial primary key,
+login varchar(64),
+valuename int references valuenames,
+value real
+);
+
+drop table userbalance;
+
+create table valuenames(
+id serial primary key,
+valuename varchar(128) unique
+);
+
+drop table valuenames;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -33,7 +59,6 @@ drop table users;]]></console>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files>
-      <object connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" object-ref="consoles/Connection" />
       <object connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" object-ref="schemas/public/tables/exchangesvalues" />
     </open-files>
   </component>
@@ -42,6 +67,8 @@ drop table users;]]></console>
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" dataset="public.users" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" dataset="public.userbalance" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" dataset="public.valuenames" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" dataset="public.userss" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" dataset="public.exchangesvalues" active-filter-id="EMPTY_FILTER" />
   </component>

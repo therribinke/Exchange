@@ -40,7 +40,10 @@ public class UserService {
 
     }
     public void deleteUser(Long id){
-
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
+        session.delete(user);
+        session.getTransaction().commit();
     }
     public User getUserByID(Long id){
         Session session = sessionFactory.openSession();
@@ -59,6 +62,7 @@ public class UserService {
         return query.getSingleResultOrNull() == null;
 
     }
+
 
 
 

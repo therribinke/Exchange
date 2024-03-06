@@ -16,6 +16,9 @@
         <mapping class="com.example.demo.dao.model.User"/>
         <mapping class="com.example.demo.dao.model.ExchangesValues"/>
         <mapping class="com.example.demo.dao.model.Exchange"/>
+        <mapping class="com.example.demo.dao.model.UserBalance"/>
+        <mapping class="com.example.demo.dao.model.ValueNames"/>
+
 
     </session-factory>
 </hibernate-configuration>

@@ -1,20 +1,13 @@
 package com.example.demo;
 
-import com.example.demo.dao.model.ExchangesValues;
-import com.example.demo.dao.model.UserBalance;
-import com.example.demo.dao.model.ValueNames;
-import com.example.demo.service.ExchangeService;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
+import com.example.demo.dao.model.User;
+import com.example.demo.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
-
 @SpringBootTest
 class DemoApplicationTests {
-
+	private  UserService userService  = new UserService();
 	@Test
 	void contextLoads() {
 		/*ExchangeService exchangeService = new ExchangeService();
@@ -88,8 +81,19 @@ class DemoApplicationTests {
 		/*ExchangeService exchangeService = new ExchangeService();
 		List<ExchangesValues> list = exchangeService.getAllCourses();
 		for (ExchangesValues list1 :list){
-			System.out.println(list1);*/
-		}
+			System.out.println(list1);
+		}*/
+		/*ExchangeService exchangeService;*/
+
+
+		/*User user= User.builder()
+				.login("123")
+				.password("123")
+				.email("123")
+				.build();
+		System.out.println(user);
+		userService.saveUser(user);*/
+
 	}
 
 	/*@Test

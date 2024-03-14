@@ -2,14 +2,15 @@
 package com.example.demo.service;
 
 import com.example.demo.HibernateSession;
-import com.example.demo.dao.model.User;
+import com.example.demo.dao.model.*;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
 
-
-import com.example.demo.dao.model.User;
+import java.lang.String;
+import com.example.demo.dao.model.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.validation.constraints.Null;
 import org.hibernate.Session;
@@ -20,7 +21,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
-
+@Transactional
 @Service
 public class UserService {
 
@@ -29,7 +30,6 @@ public class UserService {
     User user = new User();
     /*Configuration configuration = new Configuration();*/
 
-    private long ID=0;
 
 
     public void saveUser(User user){
@@ -37,11 +37,11 @@ public class UserService {
         session.getTransaction().begin();
         session.save(user);
         session.getTransaction().commit();
-
     }
     public void deleteUser(Long id){
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
+        user = session.get(User.class,id);
         session.delete(user);
         session.getTransaction().commit();
     }
@@ -51,33 +51,29 @@ public class UserService {
         user = session.get(User.class,id);
         session.getTransaction().commit();
         return user;
-
     }
-    public boolean checkSameLogin(String login){
+    public User getUserByLogin(String login){
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
         Query<User> query = session.createQuery("FROM users WHERE login = :login",User.class);
         query.setParameter("login",login);
+        if (query.getSingleResultOrNull()==null){
+            System.out.println("query.getSingleResultOrNull()");
+        }
+        System.out.println(query.getSingleResultOrNull());
+
         session.getTransaction().commit();
-        return query.getSingleResultOrNull() == null;
-
+        return query.getSingleResultOrNull();
+    }
+    public boolean checkSameLogin(String login){
+        return  getUserByLogin(login) == null;
     }
 
-
-
-
-   /* public String getPasswordByLogin(String Login){
-    configuration.configure();
-    SessionFactory sessionFactory = configuration.buildSessionFactory();
-    Session session = sessionFactory.openSession();
-    session.getTransaction().begin();
-
-
-    session.getTransaction().commit();
-
+    public String getPasswordByLogin(String login){
+        return getUserByLogin(login).getPassword();
     }
-    public Long getIDByLogin(String Login){
-
-    }*/
+    public Long getIDByLogin(String login){
+        return getUserByLogin(login).getId();
+    }
 }
 

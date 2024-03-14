@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.HibernateSession;
+import com.example.demo.dao.model.Exchange;
 import com.example.demo.dao.model.ExchangesValues;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -39,4 +40,5 @@ public class ExchangeService {
         session.save(exchangesValues);
         session.getTransaction().commit();
     }
+
 }

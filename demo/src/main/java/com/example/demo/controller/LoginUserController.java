@@ -1,4 +1,4 @@
-/*
+
 package com.example.demo.controller;
 
 
@@ -29,7 +29,7 @@ public class LoginUserController {
         return"login";
     }
     @PostMapping("/login/check")
-    public String checkUserLogin(Users user,Model model){
+    public String checkUserLogin(User user, Model model){
         if(userService.getPasswordByLogin(user.getLogin()).equals(user.getPassword())) {
             return "redirect:/logining"+ userService.getIDByLogin(user.getLogin());
         }
@@ -38,5 +38,5 @@ public class LoginUserController {
             return "login";
         }
     }
-}*/
+}
 

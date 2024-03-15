@@ -1,44 +1,41 @@
 package com.example.demo.service;
 
-import com.example.demo.HibernateSession;
+import com.example.demo.dao.ExchangeRepo;
 import com.example.demo.dao.model.Exchange;
-import com.example.demo.dao.model.ExchangesValues;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
 public class ExchangeService {
-    SessionFactory sessionFactory = HibernateSession.buildSessionFactory();
 
-    public  List<ExchangesValues> getCourse(String valuename1, String valuename2) {
-        Session session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        Query<ExchangesValues> query = session.createQuery("FROM exchangesvalues " +
-                                                    "WHERE (valuename1 = :valuename1) AND " +
-                                                    "(valuename2 = :valuename2)",ExchangesValues.class);
+    private final ExchangeRepo exchangeRepo;
 
-        query.setParameter("valuename1",valuename1);
-        query.setParameter("valuename2",valuename2);
-        List<ExchangesValues> list = query.getResultList();
-        session.getTransaction().commit();
-        return list;
+    @Transactional
+    public List<Exchange> getExchanges(){
+        return exchangeRepo.findAll();
     }
-    public  List<ExchangesValues> getAllCourses() {
-        Session session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        Query<ExchangesValues> query = session.createQuery("FROM exchangesvalues",ExchangesValues.class);
-        List<ExchangesValues> list = query.getResultList();
-        session.getTransaction().commit();
-        return list;
+    @Transactional
+    public Exchange saveExchange(Exchange exchangeRequest){
+        return exchangeRepo.save(exchangeRequest);
     }
 
-    public void saveExchangeCourse(ExchangesValues exchangesValues){
-        Session session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        session.save(exchangesValues);
-        session.getTransaction().commit();
+    @Transactional
+    public Exchange updateExchange(Integer id,Exchange exchangeRequest){
+        if (exchangeRepo.existsById(id)) {
+            exchangeRequest.setId(id);
+            return exchangeRepo.save(exchangeRequest);
+        }
+        throw new EntityNotFoundException("Exchange with id = %s not found".formatted(id));
+    }
+
+    @Transactional
+    public void deleteExchange(Integer id){
+        exchangeRepo.deleteById(id);
     }
 
 }

@@ -1,18 +1,18 @@
 package com.example.demo.dao.model;
 
-import lombok.*;
 import jakarta.persistence.*;
-import java.lang.String;
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+@Getter
+@Setter
+@Accessors(chain = true)
 @Entity(name="users")
 @Table(name="users",schema = "public")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     @Column(name="login")
     private String login;
     @Column(name="password")

@@ -26,6 +26,14 @@ email varchar(100)
 
 drop table users;
 
+create table exchanges(
+id serial primary key,
+exchangename varchar(128),
+description varchar(256)
+)
+
+drop table exchanges;
+
 create table exchangesvalues(
 id serial primary key,
 exchangename varchar(128),
@@ -58,9 +66,7 @@ drop table valuenames;]]></console>
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" object-ref="schemas/public/tables/exchanges" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="61580fc5-0958-4359-8c96-9d46162a6d1b" />

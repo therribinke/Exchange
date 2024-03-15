@@ -1,79 +1,43 @@
-
 package com.example.demo.service;
 
-import com.example.demo.HibernateSession;
-import com.example.demo.dao.model.*;
+import com.example.demo.dao.UserRepo;
+import com.example.demo.dao.model.User;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-
-
-import java.lang.String;
-import com.example.demo.dao.model.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.validation.constraints.Null;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.query.Query;
-import org.springframework.stereotype.Service;
-
 
 import java.util.List;
-@Transactional
+
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-    SessionFactory sessionFactory =  HibernateSession.buildSessionFactory();
+    private final UserRepo userRepo;
 
-    User user = new User();
-    /*Configuration configuration = new Configuration();*/
-
-
-
-    public void saveUser(User user){
-        Session session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        session.save(user);
-        session.getTransaction().commit();
+    @Transactional
+    public List<User> getUsers() {
+        return userRepo.findAll();
     }
-    public void deleteUser(Long id){
-        Session session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        user = session.get(User.class,id);
-        session.delete(user);
-        session.getTransaction().commit();
+
+    @Transactional
+    public User saveUser(User userRequest) {
+        return userRepo.save(userRequest);
     }
-    public User getUserByID(Long id){
-        Session session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        user = session.get(User.class,id);
-        session.getTransaction().commit();
-        return user;
-    }
-    public User getUserByLogin(String login){
-        Session session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        Query<User> query = session.createQuery("FROM users WHERE login = :login",User.class);
-        query.setParameter("login",login);
-        if (query.getSingleResultOrNull()==null){
-            System.out.println("query.getSingleResultOrNull()");
+
+    @Transactional
+    public User updateUser(Integer id, User userRequest) {
+        if (userRepo.existsById(id)) {
+            userRequest.setId(id);
+            return userRepo.save(userRequest);
         }
-        System.out.println(query.getSingleResultOrNull());
-
-        session.getTransaction().commit();
-        return query.getSingleResultOrNull();
-    }
-    public boolean checkSameLogin(String login){
-        return  getUserByLogin(login) == null;
+        throw new EntityNotFoundException("User with id = %s not found".formatted(id));
     }
 
-    public String getPasswordByLogin(String login){
-        return getUserByLogin(login).getPassword();
+    @Transactional
+    public void deleteUser(Integer id) {
+           userRepo.deleteById(id);
     }
-    public Long getIDByLogin(String login){
-        return getUserByLogin(login).getId();
-    }
+
 }
 

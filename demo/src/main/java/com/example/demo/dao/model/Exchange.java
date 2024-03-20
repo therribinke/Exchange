@@ -17,6 +17,7 @@ public class Exchange {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String exchangename;
     private String description;
 }

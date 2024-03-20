@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class ExchangeResponse {
     private Integer id;
+
     private String exchangename;
     private String description;
 }

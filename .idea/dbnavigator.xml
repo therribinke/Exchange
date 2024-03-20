@@ -66,9 +66,7 @@ drop table valuenames;]]></console>
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" object-ref="consoles/Connection" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="61580fc5-0958-4359-8c96-9d46162a6d1b" />
@@ -139,8 +137,8 @@ drop table valuenames;]]></console>
           <restore-workspace-deep value="false" />
           <environment-type value="default" />
           <connectivity-timeout value="30" />
-          <idle-time-to-disconnect value="30" />
-          <idle-time-to-disconnect-pool value="5" />
+          <idle-time-to-disconnect value="60" />
+          <idle-time-to-disconnect-pool value="60" />
           <credential-expiry-time value="10" />
           <max-connection-pool-size value="7" />
           <alternative-statement-delimiter value="" />

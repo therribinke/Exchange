@@ -15,8 +15,8 @@ public class UserBalance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String login;
+    private Integer id;
+
     @ManyToOne
     @JoinColumn(name="valuename")
     private ValueNames valuename;

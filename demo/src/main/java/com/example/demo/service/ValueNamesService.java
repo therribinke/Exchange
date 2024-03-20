@@ -1,8 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.ValueNamesRepo;
+import com.example.demo.dao.repos.ValueNamesRepo;
 import com.example.demo.dao.model.ValueNames;
-import com.example.demo.dto.ValueNamesRequest;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -10,10 +9,12 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class ValueNamesService {
+
     private final ValueNamesRepo valueNamesRepo;
     @Transactional
     public List<ValueNames> getValueNames(){
@@ -22,6 +23,13 @@ public class ValueNamesService {
     @Transactional
     public ValueNames getValueName(Long id){
         return valueNamesRepo.getReferenceById(id);
+    }
+
+    @Transactional
+    public ValueNames getValueNameByValueName(String valuename){
+
+        List<ValueNames> list = valueNamesRepo.findByValuenameLike(valuename);
+        return list.getFirst();
     }
 
     @Transactional

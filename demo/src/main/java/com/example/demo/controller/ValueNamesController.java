@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.Converter.ValueNamesConverter;
-import com.example.demo.dao.ValueNamesRepo;
 import com.example.demo.dao.model.ValueNames;
 import com.example.demo.dto.ValueNamesRequest;
 import com.example.demo.dto.ValueNamesResponse;
@@ -10,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigInteger;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;

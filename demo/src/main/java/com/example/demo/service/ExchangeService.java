@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.ExchangeRepo;
+import com.example.demo.dao.repos.ExchangeRepo;
 import com.example.demo.dao.model.Exchange;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;

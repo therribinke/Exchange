@@ -2,17 +2,15 @@ package com.example.demo.dao.model;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.Accessors;
 
-@Data
+
+@Getter
+@Setter
+@Accessors(chain = true)
 @Entity(name="exchangesvalues")
-@AllArgsConstructor
-@NoArgsConstructor
 @Table
-@Builder
 public class ExchangesValues {
 
     @Id
@@ -21,12 +19,8 @@ public class ExchangesValues {
 
     @Column(name="exchangename")
     private String exchangename;
-    @ManyToOne
-    @JoinColumn(name="valuename1")
-    private ValueNames valuename1;
-    @ManyToOne
-    @JoinColumn(name="valuename2")
-    private ValueNames valuename2;
+    private Long valuename1;
+    private Long valuename2;
     private Float value1;
     private Float value2;
 }

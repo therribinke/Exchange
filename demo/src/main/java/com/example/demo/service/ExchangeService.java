@@ -25,7 +25,7 @@ public class ExchangeService {
     }
 
     @Transactional
-    public Exchange updateExchange(Integer id,Exchange exchangeRequest){
+    public Exchange updateExchange(Long id,Exchange exchangeRequest){
         if (exchangeRepo.existsById(id)) {
             exchangeRequest.setId(id);
             return exchangeRepo.save(exchangeRequest);
@@ -34,7 +34,7 @@ public class ExchangeService {
     }
 
     @Transactional
-    public void deleteExchange(Integer id){
+    public void deleteExchange(Long id){
         exchangeRepo.deleteById(id);
     }
 

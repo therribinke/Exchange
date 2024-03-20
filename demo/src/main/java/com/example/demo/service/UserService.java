@@ -26,7 +26,7 @@ public class UserService {
     }
 
     @Transactional
-    public User updateUser(Integer id, User userRequest) {
+    public User updateUser(Long id, User userRequest) {
         if (userRepo.existsById(id)) {
             userRequest.setId(id);
             return userRepo.save(userRequest);
@@ -35,7 +35,7 @@ public class UserService {
     }
 
     @Transactional
-    public void deleteUser(Integer id) {
+    public void deleteUser(Long id) {
            userRepo.deleteById(id);
     }
 

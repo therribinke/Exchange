@@ -36,14 +36,14 @@ public class UserController {
     }
 
     @PutMapping(value = "/{id}",consumes = APPLICATION_JSON_VALUE,produces = APPLICATION_JSON_VALUE)
-    public UserResponse updateUser(@PathVariable Integer id, @RequestBody UserRequest userRequest){
+    public UserResponse updateUser(@PathVariable Long id, @RequestBody UserRequest userRequest){
         User updateUser = userService.updateUser(id,UserConverter.userRequestConvertToUser(userRequest));
         return UserConverter.userConvertToUserResponse(updateUser);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(value = "/{id}",produces = APPLICATION_JSON_VALUE)
-    public void deleteUser(@PathVariable Integer id){
+    public void deleteUser(@PathVariable Long id){
         userService.deleteUser(id);
     }
 

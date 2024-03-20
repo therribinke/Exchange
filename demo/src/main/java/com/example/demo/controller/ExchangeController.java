@@ -37,7 +37,7 @@ public class ExchangeController {
     }
 
     @PutMapping(value = "/{id}",consumes = APPLICATION_JSON_VALUE,produces = APPLICATION_JSON_VALUE)
-    public ExchangeResponse updateExchange(@PathVariable Integer id,@RequestBody ExchangeRequest exchangeRequest){
+    public ExchangeResponse updateExchange(@PathVariable Long id,@RequestBody ExchangeRequest exchangeRequest){
         Exchange updateExchange = exchangeService.updateExchange
                 (id,ExchangeConverter.exchangeRequestConvertToExchange(exchangeRequest));
         return ExchangeConverter.exchangeConvertToExchangeResponse(updateExchange);
@@ -45,7 +45,7 @@ public class ExchangeController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(value = "/{id}",produces = APPLICATION_JSON_VALUE)
-    public void deleteExchange(@PathVariable Integer id){
+    public void deleteExchange(@PathVariable Long id){
         exchangeService.deleteExchange(id);
     }
 }

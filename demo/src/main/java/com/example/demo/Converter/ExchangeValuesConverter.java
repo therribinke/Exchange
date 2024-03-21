@@ -15,11 +15,11 @@ import java.util.List;
 
 @UtilityClass
 public class ExchangeValuesConverter {
-    public static ExchangesValues exchangesValuesRequestConvertToExchangesValues(ExchangeValuesRequest exchangeValuesRequest,Long one,Long two) {
+    public static ExchangesValues exchangesValuesRequestConvertToExchangesValues(ExchangeValuesRequest exchangeValuesRequest,Long valueId1,Long valueId2) {
         return new ExchangesValues()
                 .setExchangename(exchangeValuesRequest.getExchangename())
-                .setValuename1(one)
-                .setValuename2(two)
+                .setValuename1(valueId1)
+                .setValuename2(valueId2)
                 .setValue1(exchangeValuesRequest.getValue1())
                 .setValue2(exchangeValuesRequest.getValue2());
     }

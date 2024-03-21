@@ -1,6 +1,5 @@
 package com.example.demo.dto;
 
-import com.example.demo.dao.model.ValueNames;
 import lombok.Builder;
 import lombok.Data;
 

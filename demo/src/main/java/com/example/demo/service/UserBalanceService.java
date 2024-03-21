@@ -1,7 +1,11 @@
 package com.example.demo.service;
 
+import com.example.demo.Converter.UserConverter;
+import com.example.demo.dao.model.User;
 import com.example.demo.dao.model.UserBalance;
 import com.example.demo.dao.repos.UserBalanceRepo;
+import com.example.demo.dao.repos.UserRepo;
+import com.example.demo.dto.UserRequest;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserBalanceService {
     private final UserBalanceRepo userBalanceRepo;
+    private final UserService userService;
 
     @Transactional
     public List<UserBalance> getAllUserBalance() {
@@ -27,6 +32,12 @@ public class UserBalanceService {
     @Transactional
     public UserBalance saveUserBalance(UserBalance userBalanceRequest) {
         return userBalanceRepo.save(userBalanceRequest);
+    }
+
+
+    public void updateUserBalance( Long idUser, Long idBalance, User user){
+        User updateUserBalance = UserConverter.userConvertToUser(idBalance,user);
+        userService.updateUser(idUser, updateUserBalance);
     }
 
     @Transactional

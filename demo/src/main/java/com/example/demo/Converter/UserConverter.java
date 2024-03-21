@@ -5,6 +5,7 @@ import com.example.demo.dto.UserRequest;
 import com.example.demo.dto.UserResponse;
 import lombok.experimental.UtilityClass;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 @UtilityClass
@@ -13,6 +14,17 @@ public class UserConverter {
         return new User().setLogin(userRequest.getLogin())
                 .setPassword(userRequest.getPassword())
                 .setEmail(userRequest.getEmail());
+    }
+    public static User userConvertToUser(Long id,User user) {
+        if(user.getBalance()==null) {
+        user.setBalance(new ArrayList<>());
+        }
+        List<Long> list = user.getBalance();
+        list.addLast(id);
+        return new User().setLogin(user.getLogin())
+                .setPassword(user.getPassword())
+                .setEmail(user.getEmail())
+                .setBalance(list);
     }
 
     public static UserResponse userConvertToUserResponse(User user) {

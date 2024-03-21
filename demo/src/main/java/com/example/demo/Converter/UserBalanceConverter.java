@@ -11,9 +11,9 @@ import java.util.List;
 @UtilityClass
 public class UserBalanceConverter {
 
-    public static UserBalance userBalanceRequestConvertToUserBalance(UserBalanceRequest userBalanceRequest) {
+    public static UserBalance userBalanceRequestConvertToUserBalance(UserBalanceRequest userBalanceRequest,Long valueId) {
         return new UserBalance()
-                .setValuename(userBalanceRequest.getValuename())
+                .setValuename(valueId)
                 .setValue(userBalanceRequest.getValue());
     }
 

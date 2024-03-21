@@ -21,10 +21,22 @@ public class UserService {
     }
 
     @Transactional
+    public User getUser(Long id) {
+        return userRepo.getReferenceById(id);
+    }
+    @Transactional
     public User saveUser(User userRequest) {
         return userRepo.save(userRequest);
     }
 
+   /* @Transactional
+    public User addUserBalance(Long id,Long idBalance,User userRequest){
+        if (userRepo.existsById(id)) {
+            userRequest.setBalance();
+            return userRepo.save(userRequest);
+        }
+        throw new EntityNotFoundException("User with id = %s not found".formatted(id));
+    }*/
     @Transactional
     public User updateUser(Long id, User userRequest) {
         if (userRepo.existsById(id)) {

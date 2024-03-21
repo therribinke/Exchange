@@ -36,10 +36,10 @@ public class ExchangeValuesController {
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ExchangeValuesResponse addExchangeValue(@RequestBody ExchangeValuesRequest exchangeValuesRequest) {
-        ValueNames o1 = valueNamesService.getValueNameByValueName(exchangeValuesRequest.getValuename1());
-        ValueNames o2 = valueNamesService.getValueNameByValueName(exchangeValuesRequest.getValuename2());
+        ValueNames valueNames1 = valueNamesService.getValueNameByValueName(exchangeValuesRequest.getValuename1());
+        ValueNames valueNames2 = valueNamesService.getValueNameByValueName(exchangeValuesRequest.getValuename2());
         ExchangesValues exchangesValues = exchangeValuesService.saveExchangeValue(ExchangeValuesConverter
-                .exchangesValuesRequestConvertToExchangesValues(exchangeValuesRequest, o1.getId(), o2.getId()));
+                .exchangesValuesRequestConvertToExchangesValues(exchangeValuesRequest, valueNames1.getId(), valueNames2.getId()));
         return ExchangeValuesConverter.exchangeValuesConvertToExchangeValuesResponse(exchangesValues);
     }
 

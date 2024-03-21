@@ -47,7 +47,6 @@ drop table exchangesvalues;
 
 create table userbalance(
 id serial primary key,
-login varchar(64),
 valuename int references valuenames,
 value real
 );

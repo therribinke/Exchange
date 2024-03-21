@@ -1,25 +1,21 @@
 package com.example.demo.dao.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.Accessors;
 
-@Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+@Getter
+@Setter
+@Accessors(chain = true)
+@Entity(name = "userbalance")
+@Table(name="userbalance",schema = "public")
 public class UserBalance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @ManyToOne
-    @JoinColumn(name="valuename")
-    private ValueNames valuename;
+    private Long valuename;
     private Float value;
 
 }

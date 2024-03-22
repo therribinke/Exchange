@@ -25,6 +25,12 @@ public class ExchangeService {
     }
 
     @Transactional
+    public Exchange getExchangeByExchangeName(String string){
+        List<Exchange> list = exchangeRepo.findByExchangenameLike(string);
+        return list.getFirst();
+    }
+
+    @Transactional
     public Exchange updateExchange(Long id,Exchange exchangeRequest){
         if (exchangeRepo.existsById(id)) {
             exchangeRequest.setId(id);

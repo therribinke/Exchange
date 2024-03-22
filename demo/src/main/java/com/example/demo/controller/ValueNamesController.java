@@ -2,8 +2,8 @@ package com.example.demo.controller;
 
 import com.example.demo.Converter.ValueNamesConverter;
 import com.example.demo.dao.model.ValueNames;
-import com.example.demo.dto.ValueNamesRequest;
-import com.example.demo.dto.ValueNamesResponse;
+import com.example.demo.dto.request.ValueNamesRequest;
+import com.example.demo.dto.response.ValueNamesResponse;
 import com.example.demo.service.ValueNamesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

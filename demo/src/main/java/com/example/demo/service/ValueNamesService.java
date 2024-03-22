@@ -27,7 +27,6 @@ public class ValueNamesService {
 
     @Transactional
     public ValueNames getValueNameByValueName(String valuename){
-
         List<ValueNames> list = valueNamesRepo.findByValuenameLike(valuename);
         return list.getFirst();
     }

@@ -2,13 +2,10 @@ package com.example.demo.controller;
 
 import com.example.demo.Converter.ExchangeConverter;
 import com.example.demo.dao.model.Exchange;
-import com.example.demo.dto.ExchangeRequest;
-import com.example.demo.dto.ExchangeResponse;
+import com.example.demo.dto.request.ExchangeRequest;
+import com.example.demo.dto.response.ExchangeResponse;
 import com.example.demo.service.ExchangeService;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

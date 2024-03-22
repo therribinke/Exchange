@@ -4,8 +4,8 @@ import com.example.demo.Converter.UserBalanceConverter;
 import com.example.demo.dao.model.User;
 import com.example.demo.dao.model.UserBalance;
 import com.example.demo.dao.model.ValueNames;
-import com.example.demo.dto.UserBalanceRequest;
-import com.example.demo.dto.UserBalanceResponse;
+import com.example.demo.dto.request.UserBalanceRequest;
+import com.example.demo.dto.response.UserBalanceResponse;
 import com.example.demo.service.UserBalanceService;
 import com.example.demo.service.UserService;
 import com.example.demo.service.ValueNamesService;
@@ -44,6 +44,15 @@ public class UserBalanceController {
         userBalanceService.updateUserBalance(id,userBalance.getId(),user);
         return UserBalanceConverter.userBalanceConvertToUserBalanceResponse(userBalance);
     }
+
+    /*@ResponseStatus(HttpStatus.OK)
+    @PostMapping(value = "/user/{id}/{valueNameSell}/{valueNameBuy}/{valueSell}",produces = APPLICATION_JSON_VALUE)
+    public void exchangeUserValue(@PathVariable Long idUser, @PathVariable String valueNameSell,
+                                                 @PathVariable String valueNameBuy, @PathVariable Float valueSell){
+        User user = userService.getUser(idUser);
+
+    }*/
+
 
     @PutMapping(value = "/user/{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public UserBalanceResponse updateUserBalance(@PathVariable Long id,

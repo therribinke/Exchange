@@ -1,8 +1,8 @@
 package com.example.demo.Converter;
 
 import com.example.demo.dao.model.UserBalance;
-import com.example.demo.dto.UserBalanceRequest;
-import com.example.demo.dto.UserBalanceResponse;
+import com.example.demo.dto.request.UserBalanceRequest;
+import com.example.demo.dto.response.UserBalanceResponse;
 import lombok.experimental.UtilityClass;
 
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package com.example.demo.dto;
+package com.example.demo.dto.request;
 
 import com.example.demo.dao.model.ValueNames;
 import jakarta.persistence.Column;

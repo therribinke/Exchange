@@ -1,8 +1,8 @@
 package com.example.demo.Converter;
 
 import com.example.demo.dao.model.Exchange;
-import com.example.demo.dto.ExchangeRequest;
-import com.example.demo.dto.ExchangeResponse;
+import com.example.demo.dto.request.ExchangeRequest;
+import com.example.demo.dto.response.ExchangeResponse;
 import lombok.experimental.UtilityClass;
 
 import java.util.Collection;

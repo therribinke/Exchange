@@ -1,8 +1,8 @@
 package com.example.demo.Converter;
 
 import com.example.demo.dao.model.User;
-import com.example.demo.dto.UserRequest;
-import com.example.demo.dto.UserResponse;
+import com.example.demo.dto.request.UserRequest;
+import com.example.demo.dto.response.UserResponse;
 import lombok.experimental.UtilityClass;
 
 import java.util.ArrayList;

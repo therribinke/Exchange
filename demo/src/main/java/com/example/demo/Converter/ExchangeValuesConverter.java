@@ -1,13 +1,8 @@
 package com.example.demo.Converter;
 
 import com.example.demo.dao.model.ExchangesValues;
-import com.example.demo.dao.model.ValueNames;
-import com.example.demo.dto.ExchangeValuesRequest;
-import com.example.demo.dto.ExchangeValuesResponse;
-import com.example.demo.service.ValueNamesService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import com.example.demo.dto.request.ExchangeValuesRequest;
+import com.example.demo.dto.response.ExchangeValuesResponse;
 import lombok.experimental.UtilityClass;
 
 import java.util.Collection;

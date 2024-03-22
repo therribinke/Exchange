@@ -4,8 +4,8 @@ package com.example.demo.controller;
 
 import com.example.demo.Converter.UserConverter;
 import com.example.demo.dao.model.User;
-import com.example.demo.dto.UserRequest;
-import com.example.demo.dto.UserResponse;
+import com.example.demo.dto.request.UserRequest;
+import com.example.demo.dto.response.UserResponse;
 import com.example.demo.service.UserService;
 
 import lombok.RequiredArgsConstructor;

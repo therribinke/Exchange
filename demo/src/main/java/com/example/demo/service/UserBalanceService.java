@@ -4,8 +4,6 @@ import com.example.demo.Converter.UserConverter;
 import com.example.demo.dao.model.User;
 import com.example.demo.dao.model.UserBalance;
 import com.example.demo.dao.repos.UserBalanceRepo;
-import com.example.demo.dao.repos.UserRepo;
-import com.example.demo.dto.UserRequest;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

@@ -3,8 +3,7 @@ package com.example.demo.dto.request;
 import lombok.Data;
 
 @Data
-public class UserBalanceRequest {
-
+public class CurrencyRequest {
     private String title;
-    private Float value;
+    private String letters;
 }

@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.Converter.UserConverter;
-import com.example.demo.dao.model.User;
+import com.example.demo.dao.model.UserData;
 import com.example.demo.dao.model.UserBalance;
 import com.example.demo.dao.repos.UserBalanceRepo;
 import jakarta.persistence.EntityNotFoundException;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserBalanceService {
     private final UserBalanceRepo userBalanceRepo;
-    private final UserService userService;
+    private final UserDataService userDataService;
 
     @Transactional
     public List<UserBalance> getAllUserBalance() {
@@ -33,9 +33,9 @@ public class UserBalanceService {
     }
 
 
-    public void updateUserBalance( Long idUser, Long idBalance, User user){
-        User updateUserBalance = UserConverter.userConvertToUser(idBalance,user);
-        userService.updateUser(idUser, updateUserBalance);
+    public void updateUserBalance( Long idUser, Long idBalance, UserData userData){
+        UserData updateUserBalanceData = UserConverter.userConvertToUser(idBalance, userData);
+        userDataService.updateUser(idUser, updateUserBalanceData);
     }
 
     @Transactional

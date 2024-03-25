@@ -1,14 +1,14 @@
 package com.example.demo.controller;
 
 import com.example.demo.Converter.UserBalanceConverter;
-import com.example.demo.dao.model.User;
+import com.example.demo.dao.model.Currency;
+import com.example.demo.dao.model.UserData;
 import com.example.demo.dao.model.UserBalance;
-import com.example.demo.dao.model.ValueNames;
 import com.example.demo.dto.request.UserBalanceRequest;
 import com.example.demo.dto.response.UserBalanceResponse;
 import com.example.demo.service.UserBalanceService;
-import com.example.demo.service.UserService;
-import com.example.demo.service.ValueNamesService;
+import com.example.demo.service.UserDataService;
+import com.example.demo.service.CurrencyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +21,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping(value = "/balance")
 public class UserBalanceController {
     private final UserBalanceService userBalanceService;
-    private final UserService userService;
-    private final ValueNamesService valueNamesService;
+    private final UserDataService userDataService;
+    private final CurrencyService currencyService;
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
     public List<UserBalanceResponse> getAllUserBalance() {
@@ -37,11 +37,11 @@ public class UserBalanceController {
     @PostMapping(value = "/user/{id}",consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public UserBalanceResponse addUserBalance(@PathVariable Long id,
                                               @RequestBody UserBalanceRequest userBalanceRequest) {
-        ValueNames valueNames = valueNamesService.getValueNameByValueName(userBalanceRequest.getValuename());
-        User user = userService.getUser(id);
+        Currency currency = currencyService.getValueNameByValueName(userBalanceRequest.getTitle());
+        UserData userData = userDataService.getUser(id);
         UserBalance userBalance = userBalanceService.saveUserBalance
-                (UserBalanceConverter.userBalanceRequestConvertToUserBalance(userBalanceRequest,valueNames.getId()));
-        userBalanceService.updateUserBalance(id,userBalance.getId(),user);
+                (UserBalanceConverter.userBalanceRequestConvertToUserBalance(userBalanceRequest, currency.getId()));
+        userBalanceService.updateUserBalance(id,userBalance.getId(), userData);
         return UserBalanceConverter.userBalanceConvertToUserBalanceResponse(userBalance);
     }
 
@@ -49,7 +49,7 @@ public class UserBalanceController {
     @PostMapping(value = "/user/{id}/{valueNameSell}/{valueNameBuy}/{valueSell}",produces = APPLICATION_JSON_VALUE)
     public void exchangeUserValue(@PathVariable Long idUser, @PathVariable String valueNameSell,
                                                  @PathVariable String valueNameBuy, @PathVariable Float valueSell){
-        User user = userService.getUser(idUser);
+        UserData user = userDataService.getUser(idUser);
 
     }*/
 
@@ -57,9 +57,9 @@ public class UserBalanceController {
     @PutMapping(value = "/user/{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public UserBalanceResponse updateUserBalance(@PathVariable Long id,
                                                  @RequestBody UserBalanceRequest userBalanceRequest) {
-        ValueNames valueNames = valueNamesService.getValueNameByValueName(userBalanceRequest.getValuename());
+        Currency currency = currencyService.getValueNameByValueName(userBalanceRequest.getTitle());
         UserBalance userBalance = userBalanceService.updateUserBalance
-                (id, UserBalanceConverter.userBalanceRequestConvertToUserBalance(userBalanceRequest,valueNames.getId()));
+                (id, UserBalanceConverter.userBalanceRequestConvertToUserBalance(userBalanceRequest, currency.getId()));
         return UserBalanceConverter.userBalanceConvertToUserBalanceResponse(userBalance);
     }
     @DeleteMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)

@@ -8,14 +8,14 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 @Entity(name = "userbalance")
-@Table(name="userbalance",schema = "public")
+@Table(name="user_balance",schema = "public")
 public class UserBalance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long valuename;
+    private Long titleId;
     private Float value;
 
 }

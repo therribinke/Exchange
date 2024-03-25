@@ -10,9 +10,9 @@ import java.util.List;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Entity(name="users")
-@Table(name="users",schema = "public")
-public class User {
+@Entity(name="user")
+@Table(name="user_data",schema = "public")
+public class UserData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

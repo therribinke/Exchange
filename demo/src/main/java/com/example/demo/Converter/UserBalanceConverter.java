@@ -11,16 +11,16 @@ import java.util.List;
 @UtilityClass
 public class UserBalanceConverter {
 
-    public static UserBalance userBalanceRequestConvertToUserBalance(UserBalanceRequest userBalanceRequest,Long valueId) {
+    public static UserBalance userBalanceRequestConvertToUserBalance(UserBalanceRequest userBalanceRequest,Long titleId) {
         return new UserBalance()
-                .setValuename(valueId)
+                .setTitleId(titleId)
                 .setValue(userBalanceRequest.getValue());
     }
 
     public static UserBalanceResponse userBalanceConvertToUserBalanceResponse(UserBalance userBalance) {
         return UserBalanceResponse.builder()
                 .id(userBalance.getId())
-                .valuename(userBalance.getValuename())
+                .titleId(userBalance.getTitleId())
                 .value(userBalance.getValue())
                 .build();
     }

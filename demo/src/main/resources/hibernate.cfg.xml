@@ -13,11 +13,11 @@
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="format_sql">true</property>
         <property name="show_sql">true</property>
-        <mapping class="com.example.demo.dao.model.User"/>
-        <mapping class="com.example.demo.dao.model.ExchangesValues"/>
+        <mapping class="com.example.demo.dao.model.UserData"/>
+        <mapping class="com.example.demo.dao.model.ExchangeValue"/>
         <mapping class="com.example.demo.dao.model.Exchange"/>
         <mapping class="com.example.demo.dao.model.UserBalance"/>
-        <mapping class="com.example.demo.dao.model.ValueNames"/>
+        <mapping class="com.example.demo.dao.model.Currency"/>
 
 
     </session-factory>

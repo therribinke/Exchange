@@ -16,39 +16,41 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping(value = "/balance")
 public class CurrencyExchangeController {
     private final UserBalanceService userBalanceService;
-    private final UserService userService;
-    private final ValueNamesService valueNamesService;
+    private final UserDataService userDataService;
+    private final CurrencyService currencyService;
     private final ExchangeService exchangeService;
-    private final ExchangeValuesService exchangeValuesService;
+    private final ExchangeValueService exchangeValueService;
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping(value = "/user/{idUser}/currencyexchange", consumes = APPLICATION_JSON_VALUE)
     public void exchangeUserValue(@PathVariable Long idUser,
                                   @RequestBody CurrencyExchangeRequest currencyExchangeRequest) {
-        User user = userService.getUser(idUser);
+        var user = userDataService.getUser(idUser);
         List<Long> list = user.getBalance();
-        Long valueNamesSellId = valueNamesService.getValueNameByValueName
+        Long valueNamesSellId = currencyService.getValueNameByValueName
                 (currencyExchangeRequest.getValueNameSell()).getId();
-        Long valueNamesBuyId = valueNamesService.getValueNameByValueName
+        Long valueNamesBuyId = currencyService.getValueNameByValueName
                 (currencyExchangeRequest.getValueNameBuy()).getId();
         Exchange exchangeName = exchangeService.getExchangeByExchangeName(currencyExchangeRequest.getExchangename());
-        Float valueSell = exchangeValuesService.getExchangeValueByValueNames(exchangeName.getExchangename(),valueNamesSellId, valueNamesBuyId ).getValue1();
-        Float valueBuy = exchangeValuesService.getExchangeValueByValueNames(exchangeName.getExchangename(),valueNamesSellId, valueNamesBuyId ).getValue2();
+        Float valueSell = exchangeValueService.getExchangeValueByValueNames
+                (exchangeName.getId(), valueNamesSellId, valueNamesBuyId).getValueGive();
+        Float valueBuy = exchangeValueService.getExchangeValueByValueNames
+                (exchangeName.getId(), valueNamesSellId, valueNamesBuyId).getValueReceive();
 
         Long userBalanceIdSell = 0l;
         Long userBalanceIdBuy = 0l;
         for (Long i : list) {
-            if (valueNamesSellId.equals(userBalanceService.getUserBalance(i).getValuename())) {
+            if (valueNamesSellId.equals(userBalanceService.getUserBalance(i).getTitleId())) {
                 userBalanceIdSell = userBalanceService.getUserBalance(i).getId();
-            } else if (valueNamesBuyId.equals(userBalanceService.getUserBalance(i).getValuename())) {
+            } else if (valueNamesBuyId.equals(userBalanceService.getUserBalance(i).getTitleId())) {
                 userBalanceIdBuy = userBalanceService.getUserBalance(i).getId();
             }
         }
         UserBalance userBalanceSell = userBalanceService.getUserBalance(userBalanceIdSell);
-        userBalanceSell.setValue(userBalanceSell.getValue()-currencyExchangeRequest.getValueSell());
-        userBalanceService.updateUserBalance(userBalanceIdSell,userBalanceSell);
+        userBalanceSell.setValue(userBalanceSell.getValue() - currencyExchangeRequest.getValueSell());
+        userBalanceService.updateUserBalance(userBalanceIdSell, userBalanceSell);
         UserBalance userBalanceBuy = userBalanceService.getUserBalance(userBalanceIdBuy);
-        userBalanceBuy.setValue(userBalanceBuy.getValue()+currencyExchangeRequest.getValueSell()/valueBuy/valueSell);
-        userBalanceService.updateUserBalance(userBalanceIdBuy,userBalanceBuy);
+        userBalanceBuy.setValue(userBalanceBuy.getValue() + currencyExchangeRequest.getValueSell() / valueBuy / valueSell);
+        userBalanceService.updateUserBalance(userBalanceIdBuy, userBalanceBuy);
     }
 }

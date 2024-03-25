@@ -1,9 +1,6 @@
 package com.example.demo.dao.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -11,13 +8,15 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 @Data
-@Entity(name = "exchanges")
+@Entity(name = "exchange")
+@Table(name = "exchange",schema = "public")
 public class Exchange {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name="exchange_name")
     private String exchangename;
     private String description;
 }

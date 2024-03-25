@@ -1,8 +1,8 @@
 package com.example.demo.Converter;
 
-import com.example.demo.dao.model.User;
-import com.example.demo.dto.request.UserRequest;
-import com.example.demo.dto.response.UserResponse;
+import com.example.demo.dao.model.UserData;
+import com.example.demo.dto.request.UserDataRequest;
+import com.example.demo.dto.response.UserDataResponse;
 import lombok.experimental.UtilityClass;
 
 import java.util.ArrayList;
@@ -10,32 +10,32 @@ import java.util.Collection;
 import java.util.List;
 @UtilityClass
 public class UserConverter {
-    public static User userRequestConvertToUser(UserRequest userRequest) {
-        return new User().setLogin(userRequest.getLogin())
-                .setPassword(userRequest.getPassword())
-                .setEmail(userRequest.getEmail());
+    public static UserData userRequestConvertToUser(UserDataRequest userDataRequest) {
+        return new UserData().setLogin(userDataRequest.getLogin())
+                .setPassword(userDataRequest.getPassword())
+                .setEmail(userDataRequest.getEmail());
     }
-    public static User userConvertToUser(Long id,User user) {
-        if(user.getBalance()==null) {
-        user.setBalance(new ArrayList<>());
+    public static UserData userConvertToUser(Long id, UserData userData) {
+        if(userData.getBalance()==null) {
+        userData.setBalance(new ArrayList<>());
         }
-        List<Long> list = user.getBalance();
+        List<Long> list = userData.getBalance();
         list.addLast(id);
-        return new User().setLogin(user.getLogin())
-                .setPassword(user.getPassword())
-                .setEmail(user.getEmail())
+        return new UserData().setLogin(userData.getLogin())
+                .setPassword(userData.getPassword())
+                .setEmail(userData.getEmail())
                 .setBalance(list);
     }
 
-    public static UserResponse userConvertToUserResponse(User user) {
-        return UserResponse.builder()
-                .id(user.getId())
-                .login(user.getLogin())
-                .password(user.getPassword())
-                .email(user.getEmail())
+    public static UserDataResponse userConvertToUserResponse(UserData userData) {
+        return UserDataResponse.builder()
+                .id(userData.getId())
+                .login(userData.getLogin())
+                .password(userData.getPassword())
+                .email(userData.getEmail())
                 .build();
     }
-    public static List<UserResponse> userCollectionConvertToList(Collection<User> userCollection) {
-        return userCollection.stream().map(UserConverter::userConvertToUserResponse).toList();
+    public static List<UserDataResponse> userCollectionConvertToList(Collection<UserData> userDataCollection) {
+        return userDataCollection.stream().map(UserConverter::userConvertToUserResponse).toList();
     }
 }

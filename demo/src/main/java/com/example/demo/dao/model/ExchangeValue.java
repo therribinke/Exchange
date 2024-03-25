@@ -9,18 +9,17 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Entity(name="exchangesvalues")
-@Table
-public class ExchangesValues {
+@Entity(name="exchangesvalue")
+@Table(name = "exchange_value")
+public class ExchangeValue {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="exchangename")
-    private String exchangename;
-    private Long valuename1;
-    private Long valuename2;
-    private Float value1;
-    private Float value2;
+    private Long exchangeId;
+    private Long titleGive;
+    private Long titleReceive;
+    private Float valueGive;
+    private Float valueReceive;
 }

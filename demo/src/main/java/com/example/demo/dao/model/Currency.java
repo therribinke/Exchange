@@ -5,18 +5,17 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.Accessors;
 
-import java.math.BigInteger;
-
 @Getter
 @Setter
 @Accessors(chain = true)
-@Entity(name = "valuenames")
-@Table(name = "valuenames")
-public class ValueNames {
+@Entity(name = "currency")
+@Table(name = "currency")
+public class Currency {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true,nullable = false,name = "valuename")
-    private String valuename;
+    @Column(unique = true,nullable = false)
+    private String title;
+    private String letters;
 }

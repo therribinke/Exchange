@@ -17,7 +17,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="61580fc5-0958-4359-8c96-9d46162a6d1b">
-      <console name="Connection" type="STANDARD" schema="public" session="Main"><![CDATA[create table users (
+      <console name="Connection" type="STANDARD" schema="public" session="Main"><![CDATA[create table user_data (
 id serial primary key,
 login varchar(64),
 password varchar(64),
@@ -27,39 +27,40 @@ balance bigint array
 
 drop table users;
 
-create table exchanges(
+create table exchange(
 id serial primary key,
-exchangename varchar(128),
+exchange_name varchar(128),
 description varchar(256)
 )
 
-drop table exchanges;
+drop table exchange;
 
-create table exchangesvalues(
+create table exchange_value(
 id serial primary key,
-exchangename varchar(128),
-valuename1 int references valuenames,
-valuename2 int references valuenames,
-value1 real,
-value2 real
+exchange_id int references exchange,
+title_give int references currency,
+title_receive int references currency,
+value_give real,
+value_receive real
 );
 
-drop table exchangesvalues;
+drop table exchange_value;
 
-create table userbalance(
+create table user_balance(
 id serial primary key,
-valuename int references valuenames,
+title_id int references currency,
 value real
 );
 
-drop table userbalance;
+drop table user_balance;
 
-create table valuenames(
+create table currency(
 id serial primary key,
-valuename varchar(128) unique
+title varchar(128),
+letters varchar(3)
 );
 
-drop table valuenames;]]></console>
+drop table currency;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -67,7 +68,7 @@ drop table valuenames;]]></console>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files>
-      <object connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" object-ref="schemas/public/tables/userbalance" />
+      <object connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" object-ref="schemas/public/tables/user_balance" />
     </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
@@ -76,8 +77,12 @@ drop table valuenames;]]></console>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" dataset="public.users" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" dataset="public.userbalance" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" dataset="public.user_balance" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" dataset="public.exchanges" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" dataset="public.valuenames" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" dataset="public.exchange" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" dataset="public.currency" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" dataset="public.exchange_value" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" dataset="public.userss" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" dataset="public.exchangesvalues" active-filter-id="EMPTY_FILTER" />
   </component>

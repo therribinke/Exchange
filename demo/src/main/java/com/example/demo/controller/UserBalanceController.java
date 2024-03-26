@@ -45,15 +45,6 @@ public class UserBalanceController {
         return UserBalanceConverter.userBalanceConvertToUserBalanceResponse(userBalance);
     }
 
-    /*@ResponseStatus(HttpStatus.OK)
-    @PostMapping(value = "/user/{id}/{valueNameSell}/{valueNameBuy}/{valueSell}",produces = APPLICATION_JSON_VALUE)
-    public void exchangeUserValue(@PathVariable Long idUser, @PathVariable String valueNameSell,
-                                                 @PathVariable String valueNameBuy, @PathVariable Float valueSell){
-        UserData user = userDataService.getUser(idUser);
-
-    }*/
-
-
     @PutMapping(value = "/user/{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public UserBalanceResponse updateUserBalance(@PathVariable Long id,
                                                  @RequestBody UserBalanceRequest userBalanceRequest) {

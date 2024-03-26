@@ -68,7 +68,7 @@ drop table currency;]]></console>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files>
-      <object connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" object-ref="schemas/public/tables/user_balance" />
+      <object connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" object-ref="schemas/public/tables/exchange_value" />
     </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
@@ -80,6 +80,7 @@ drop table currency;]]></console>
     <filter-actions connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" dataset="public.user_balance" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" dataset="public.exchanges" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" dataset="public.valuenames" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" dataset="public.user_data" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" dataset="public.exchange" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" dataset="public.currency" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" dataset="public.exchange_value" active-filter-id="EMPTY_FILTER" />

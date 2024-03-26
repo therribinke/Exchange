@@ -27,30 +27,23 @@ public class CurrencyExchangeController {
                                   @RequestBody CurrencyExchangeRequest currencyExchangeRequest) {
         var user = userDataService.getUser(idUser);
         List<Long> list = user.getBalance();
-        Long valueNamesSellId = currencyService.getValueNameByValueName
+        Long currencySellId = currencyService.getValueNameByValueName
                 (currencyExchangeRequest.getValueNameSell()).getId();
-        Long valueNamesBuyId = currencyService.getValueNameByValueName
+        Long currencyBuyId = currencyService.getValueNameByValueName
                 (currencyExchangeRequest.getValueNameBuy()).getId();
         Exchange exchangeName = exchangeService.getExchangeByExchangeName(currencyExchangeRequest.getExchangename());
         Float valueSell = exchangeValueService.getExchangeValueByValueNames
-                (exchangeName.getId(), valueNamesSellId, valueNamesBuyId).getValueGive();
+                (exchangeName.getId(), currencySellId, currencyBuyId).getValueGive();
         Float valueBuy = exchangeValueService.getExchangeValueByValueNames
-                (exchangeName.getId(), valueNamesSellId, valueNamesBuyId).getValueReceive();
-
-        Long userBalanceIdSell = 0l;
-        Long userBalanceIdBuy = 0l;
-        for (Long i : list) {
-            if (valueNamesSellId.equals(userBalanceService.getUserBalance(i).getTitleId())) {
-                userBalanceIdSell = userBalanceService.getUserBalance(i).getId();
-            } else if (valueNamesBuyId.equals(userBalanceService.getUserBalance(i).getTitleId())) {
-                userBalanceIdBuy = userBalanceService.getUserBalance(i).getId();
-            }
-        }
-        UserBalance userBalanceSell = userBalanceService.getUserBalance(userBalanceIdSell);
+                (exchangeName.getId(), currencySellId, currencyBuyId).getValueReceive();
+        List<Long> userBalanceId = userBalanceService.getUserBalanceIdOrException
+                (currencySellId, currencyBuyId, list, idUser);
+        UserBalance userBalanceSell = userBalanceService.getUserBalance(userBalanceId.get(0));
         userBalanceSell.setValue(userBalanceSell.getValue() - currencyExchangeRequest.getValueSell());
-        userBalanceService.updateUserBalance(userBalanceIdSell, userBalanceSell);
-        UserBalance userBalanceBuy = userBalanceService.getUserBalance(userBalanceIdBuy);
-        userBalanceBuy.setValue(userBalanceBuy.getValue() + currencyExchangeRequest.getValueSell() / valueBuy / valueSell);
-        userBalanceService.updateUserBalance(userBalanceIdBuy, userBalanceBuy);
+        userBalanceService.updateUserBalance(userBalanceId.get(0), userBalanceSell);
+        UserBalance userBalanceBuy = userBalanceService.getUserBalance(userBalanceId.get(1));
+        userBalanceBuy.setValue
+                (userBalanceBuy.getValue() + currencyExchangeRequest.getValueSell() / valueBuy * valueSell);
+        userBalanceService.updateUserBalance(userBalanceId.get(1), userBalanceBuy);
     }
 }

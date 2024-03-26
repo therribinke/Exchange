@@ -29,14 +29,6 @@ public class UserDataService {
         return userDataRepo.save(userDataRequest);
     }
 
-   /* @Transactional
-    public UserData addUserBalance(Long id,Long idBalance,UserData userDataRequest){
-        if (userDataRepo.existsById(id)) {
-            userDataRequest.setBalance();
-            return userDataRepo.save(userDataRequest);
-        }
-        throw new EntityNotFoundException("UserData with id = %s not found".formatted(id));
-    }*/
     @Transactional
     public UserData updateUser(Long id, UserData userDataRequest) {
         if (userDataRepo.existsById(id)) {

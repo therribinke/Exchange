@@ -41,7 +41,7 @@ exchange_id int references exchange,
 title_give int references currency,
 title_receive int references currency,
 value_give real,
-value_receive real
+value_receive numeric
 );
 
 drop table exchange_value;
@@ -49,7 +49,7 @@ drop table exchange_value;
 create table user_balance(
 id serial primary key,
 title_id int references currency,
-value real
+value numeric
 );
 
 drop table user_balance;
@@ -68,7 +68,11 @@ drop table currency;]]></console>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files>
+      <object connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" object-ref="schemas/public/tables/user_data" />
       <object connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" object-ref="schemas/public/tables/exchange_value" />
+      <object connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" object-ref="schemas/public/tables/currency" />
+      <object connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" object-ref="schemas/public/tables/user_balance" />
+      <object connection-id="61580fc5-0958-4359-8c96-9d46162a6d1b" object-ref="consoles/Connection" />
     </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">

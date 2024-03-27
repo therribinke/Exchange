@@ -1,8 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.Converter.UserConverter;
-import com.example.demo.dao.model.UserData;
 import com.example.demo.dao.model.UserBalance;
+import com.example.demo.dao.model.UserData;
 import com.example.demo.dao.repos.UserBalanceRepo;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -17,7 +17,6 @@ import java.util.List;
 public class UserBalanceService {
     private final UserBalanceRepo userBalanceRepo;
     private final UserDataService userDataService;
-    private final CurrencyService currencyService;
 
     @Transactional
     public List<UserBalance> getAllUserBalance() {
@@ -65,15 +64,14 @@ public class UserBalanceService {
                                                   Long idUser) {
         List<Long> result = getUserBalanceIdForTheExchange(currencySellId, currencyBuyId, list);
 
-         if (result.get(0) == (null)) {
+        if (result.get(0) == (null)) {
             saveUserBalance(new UserBalance().setTitleId(currencySellId).setValue(0F));
-            updateUserBalance(idUser, getUserBalanceByTitleId(currencySellId).getId(),userDataService.getUser(idUser));
-            throw new ArithmeticException("Your %s balance is less than what you want to exchange"
-                    .formatted(currencyService.getValueName(currencySellId)));
+            updateUserBalance(idUser, getUserBalanceByTitleId(currencySellId).getId(), userDataService.getUser(idUser));
+            result.set(0, getUserBalanceByTitleId(currencySellId).getId());
         } else if (result.get(1) == (null)) {
             saveUserBalance(new UserBalance().setTitleId(currencyBuyId).setValue(0F));
-            updateUserBalance(idUser, getUserBalanceByTitleId(currencyBuyId).getId(),userDataService.getUser(idUser));
-            result.set(1,getUserBalanceByTitleId(currencyBuyId).getId());
+            updateUserBalance(idUser, getUserBalanceByTitleId(currencyBuyId).getId(), userDataService.getUser(idUser));
+            result.set(1, getUserBalanceByTitleId(currencyBuyId).getId());
         }
         return result;
     }
@@ -86,9 +84,9 @@ public class UserBalanceService {
         for (Long i : list) {
             id = getUserBalance(i).getTitleId();
             if (currencySellId.equals(id)) {
-                result.set(0,getUserBalance(i).getId());
+                result.set(0, getUserBalance(i).getId());
             } else if (currencyBuyId.equals(id)) {
-                result.set(1,getUserBalance(i).getId());
+                result.set(1, getUserBalance(i).getId());
             }
         }
         return result;
